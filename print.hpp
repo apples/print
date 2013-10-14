@@ -262,7 +262,10 @@ void print(const char* format, Ts&&... params)
 }
 
 template <typename T, typename... Ts>
-void print(T&& out, const char* format, Ts&&... params)
+typename std::enable_if<
+    std::is_base_of<std::ostream, typename std::decay<T>::type>::value
+, void>::type
+print(T&& out, const char* format, Ts&&... params)
 {
     _PrintDetail<T> printer(std::forward<T>(out));
     return printer._print(format, std::forward<Ts>(params)...);
