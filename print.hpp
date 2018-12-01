@@ -1,3 +1,6 @@
+#ifndef PRINT_HPP
+#define PRINT_HPP
+
 /*******************************************************************************
  * Print - A fully type-safe, templated version of printf().
  * Version: 0.0.1
@@ -270,3 +273,5 @@ print(T&& out, const char* format, Ts&&... params)
     _PrintDetail<T> printer(std::forward<T>(out));
     return printer._print(format, std::forward<Ts>(params)...);
 }
+
+#endif // PRINT_HPP
